@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FruitAndVeg</string>
+    <string name="signup">הרשמה</string>
+    <string name="signin">התחברות</string>
+    <string name="slogan">אגס וגם תפוח</string>
+    <string name="EnterPhoneNumber">הכנס מספר טלפון</string>
+    <string name="EnterPassword">סיסמה</string>
+    <string name="title_activity_home">Home</string>
+    <string name="PhoneNumber">מספר טלפון</string>
+    <string name="FullName">שם מלא</string>
+    <string name="readme">ReadMe</string>
+    <string name="googlemaps">Map</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

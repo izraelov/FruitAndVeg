@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "806851727907",
+    "firebase_url": "https://fruitandveg-3f859.firebaseio.com",
+    "project_id": "fruitandveg-3f859",
+    "storage_bucket": "fruitandveg-3f859.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806851727907:android:e7c583ae63c962e9",
+        "android_client_info": {
+          "package_name": "com.idoon.fruitandveg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806851727907-dt1sue9lbtvq132ngjbks8qj0cnvkggq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idoon.fruitandveg",
+            "certificate_hash": "f8e9306a10511a27aa95e03ff33bd49e18cb3bd8"
+          }
+        },
+        {
+          "client_id": "806851727907-angnm0uaf1cceenplkd2rjua5l29kk4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB77TKdg69K6s9QD8wVG4T7vGp6-fZ_1jE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806851727907-angnm0uaf1cceenplkd2rjua5l29kk4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
