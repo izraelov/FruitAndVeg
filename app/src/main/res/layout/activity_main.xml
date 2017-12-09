@@ -54,6 +54,23 @@
         android:layout_alignBottom="@+id/linearLayout"
         android:layout_toEndOf="@+id/linearLayout" />
 
+    <info.hoang8f.widget.FButton
+        android:id="@+id/picture"
+        android:text="@string/picture"
+        android:textColor="@android:color/white"
+        android:layout_width="70dp"
+        app:buttonColor="@color/btnSignActive"
+        android:layout_height="wrap_content"
+        app:shadowColor="@android:color/black"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_centerHorizontal="true" />
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"

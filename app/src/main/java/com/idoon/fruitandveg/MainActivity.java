@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSignIn,btnSignUp,readme,maps;
+    Button btnSignIn,btnSignUp,readme,maps,picture;
     TextView txtSlogan;
 
 
@@ -24,20 +24,14 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         readme = (Button) findViewById(R.id.readme);
         maps = (Button) findViewById(R.id.map);
+        picture = (Button) findViewById(R.id.picture);
 
 
-
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        picture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-
-            }
-        });
-
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-
+            public void onClick(View view) {
+                Intent picture = new Intent(MainActivity.this, com.idoon.fruitandveg.picture.class);
+                startActivity(picture);
             }
         });
         //move to login page
@@ -66,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Intent maps = new Intent(MainActivity.this,maps.class);
+                Intent maps = new Intent(MainActivity.this,MapsActivity.class);
                 startActivity(maps);
             }
         });

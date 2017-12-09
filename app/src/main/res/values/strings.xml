@@ -10,9 +10,14 @@
     <string name="FullName">שם מלא</string>
     <string name="readme">ReadMe</string>
     <string name="googlemaps">Map</string>
+    <string name="picture">Picture</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="takepic">TakePicture</string>
+    <string name="uploadpic">Upload</string>
+    <string name="choosepic">choose</string>
 </resources>
