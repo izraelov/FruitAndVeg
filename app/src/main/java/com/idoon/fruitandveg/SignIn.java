@@ -36,6 +36,7 @@ public class SignIn extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
 
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,20 @@ public class SignIn extends AppCompatActivity {
                         //Get User info
                         mDialog.dismiss();
                         User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+
+                                if (Boolean.parseBoolean(user.getIsStaff())) // if isStaff == true
+                                {
+                                    if (user.getPassword().equals(edtPassword.getText().toString())) {
+                                        //Login ok
+                                        Toast.makeText(SignIn.this, "התחברת כמנהל בהצלחה", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        //Toast.makeText(SignIn.this, "סיסמה שגויה", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(SignIn.this, "אין לך גישת מנהל!", Toast.LENGTH_SHORT).show();
+                                }
+
+
                         if (user.getPassword().equals(edtPassword.getText().toString())) {
                             {
                                 Toast.makeText(SignIn.this,"התחברת בהצלחה!",Toast.LENGTH_SHORT).show();
