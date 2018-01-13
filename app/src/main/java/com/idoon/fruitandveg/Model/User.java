@@ -1,26 +1,42 @@
 package com.idoon.fruitandveg.Model;
 
-/**
- * Created by itayi on 02/12/2017.
- */
 
 public class User {
-    private String Name;
-    private String Password;
+    private String name;
+    private String password;
     private String Phone;
-    private String IsStaff;
+    private String isStaff;
+    private String image;
+    private String securecode;
 
     public User(){
 
     }
 
-    public User(String name ,String password){
-        Name = name;
-        Password = password;
+    public User(String name ,String password,String securecode){
+        this.name = name;
+        this.password = password;
+        isStaff = "false";
+        image = "";
+        this.securecode = securecode;
+    }
+    //
+
+
+    public String getSecureCode() {
+        return securecode;
+    }
+
+    public void setSecureCode(String secureCode) {
+        this.securecode = secureCode;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public String getIsStaff() {
-        return IsStaff;
+        return isStaff;
     }
 
     public String getPhone() {
@@ -28,7 +44,7 @@ public class User {
     }
 
     public void setIsStaff(String isStaff) {
-        IsStaff = isStaff;
+        this.isStaff = isStaff;
     }
 
     public void setPhone(String phone) {
@@ -36,18 +52,22 @@ public class User {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getPassword() {
-        return Password;
+        return this.password;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

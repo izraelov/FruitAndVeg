@@ -1,30 +1,47 @@
 package com.idoon.fruitandveg;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.idoon.fruitandveg.Common.Common;
 import com.idoon.fruitandveg.Interface.ItemClickListener;
 import com.idoon.fruitandveg.Model.Category;
 import com.idoon.fruitandveg.ViewHolder.MenuViewHolder;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+
+import static com.idoon.fruitandveg.R.id.edtPassword;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +50,8 @@ public class Home extends AppCompatActivity
     DatabaseReference category;
 
     TextView txtFullName;
+    ImageView imgprofile;
+    MaterialEditText editPassword,edtNewPassword,edtRepeatPassword;
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
 
@@ -47,7 +66,7 @@ public class Home extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        toolbar.setTitle("Menu");
+        toolbar.setTitle("תפריט");
         setSupportActionBar(toolbar);
 
         //Init FireBase
@@ -76,7 +95,13 @@ public class Home extends AppCompatActivity
         //Set Name for user
         View headerView = navigationView.getHeaderView(0);
         txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
+        imgprofile = (ImageView)findViewById(R.id.imgprofile);
+
         txtFullName.setText(Common.currentUser.getName());
+
+
+
+
 
 
         //Load Menu
@@ -154,9 +179,11 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_menu) {
-            // Handle the camera action
+        if (id == R.id.nav_change_pass) {
+            showChangePassworddDialog();
+            Toast.makeText(Home.this,"test",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_profile) {
+            Toast.makeText(Home.this,"Name: "+(Common.currentUser.getName()),Toast.LENGTH_LONG);
 
         } else if (id == R.id.nav_cart) {
 
@@ -166,8 +193,80 @@ public class Home extends AppCompatActivity
 
         }
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showChangePassworddDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("שנה סיסמה");
+        alertDialog.setMessage("אנא מלא את הפרטים הבאים");
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout_pwd = inflater.inflate(R.layout.change_password_layout,null);
+
+
+        editPassword = (MaterialEditText)layout_pwd.findViewById(edtPassword);
+        edtNewPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtNewPassword);
+        edtRepeatPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtRepeatPassword);
+        alertDialog.setView(layout_pwd);
+
+        //Button
+        alertDialog.setPositiveButton("שנה סיסמה", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Change Password here
+
+                        final android.app.AlertDialog waitingDialog = new SpotsDialog(Home.this);
+                        waitingDialog.show();
+
+                        //Check old pass
+                        if(editPassword.getText().toString().equals(Common.currentUser.getPassword()))
+                        {
+                            //check new password and repeat password
+                            if(edtNewPassword.getText().toString().equals(edtRepeatPassword.getText().toString()))
+                            {
+                                Map<String,Object> passwordUpdate = new HashMap<>();
+                                passwordUpdate.put("password",edtNewPassword.getText().toString());
+
+                                //Make update
+                                DatabaseReference user = FirebaseDatabase.getInstance().getReference("User");
+                                user.child(Common.currentUser.getPhone())
+                                        .updateChildren(passwordUpdate)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                waitingDialog.dismiss();
+                                                Toast.makeText(Home.this,"הסיסמה עודכנה בהצלחה",Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(Home.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                            else {
+                                waitingDialog.dismiss();
+                                Toast.makeText(Home.this,"הסיסמה החדשה לא מתאימה",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                        else {
+                            waitingDialog.dismiss();
+                            Toast.makeText(Home.this,"הסיסמה המקורית לא מתאימה",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+        alertDialog.setNegativeButton("בטל", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
     }
 }

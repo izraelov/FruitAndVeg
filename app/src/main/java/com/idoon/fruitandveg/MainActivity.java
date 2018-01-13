@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSignIn,btnSignUp,readme,maps,picture;
-    TextView txtSlogan;
+    Button btnSignIn,btnSignUp,maps;
+    ImageButton readme;
 
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
-        readme = (Button) findViewById(R.id.readme);
+        readme = (ImageButton) findViewById(R.id.readme);
         maps = (Button) findViewById(R.id.map);
-        picture = (Button) findViewById(R.id.picture);
 
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent picture = new Intent(MainActivity.this, com.idoon.fruitandveg.picture.class);
-                startActivity(picture);
-            }
-        });
         //move to login page
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         readme.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "ReadMe");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "ReadMe_Btn");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
                  Toast.makeText(MainActivity.this,"חנות אינטרנטית למכירת פירות וירקות", Toast.LENGTH_LONG).show();
             }
         });
@@ -60,9 +59,14 @@ public class MainActivity extends AppCompatActivity {
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Maps");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Maps_Activity");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
                 Intent maps = new Intent(MainActivity.this,MapsActivity.class);
                 startActivity(maps);
             }
         });
     }
+
 }

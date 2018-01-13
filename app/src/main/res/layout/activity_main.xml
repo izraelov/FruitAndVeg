@@ -31,44 +31,15 @@
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:layout_above="@+id/linearLayout2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/readme" />
+        android:layout_alignParentEnd="true" />
 
-
-
-
-    <info.hoang8f.widget.FButton
+    <ImageButton
         android:id="@+id/readme"
-        android:text="@string/readme"
-        android:textColor="@android:color/white"
-        android:layout_width="70dp"
-        app:buttonColor="@color/btnSignActive"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:shadowColor="@android:color/black"
-        app:shadowEnabled="true"
-        app:shadowHeight="5dp"
-        app:cornerRadius="5dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginStart="16dp"
-        android:layout_alignBottom="@+id/linearLayout"
-        android:layout_toEndOf="@+id/linearLayout" />
+        app:srcCompat="@drawable/ic_info_outline_black_24dp"
+        />
 
-    <info.hoang8f.widget.FButton
-        android:id="@+id/picture"
-        android:text="@string/picture"
-        android:textColor="@android:color/white"
-        android:layout_width="70dp"
-        app:buttonColor="@color/btnSignActive"
-        android:layout_height="wrap_content"
-        app:shadowColor="@android:color/black"
-        app:shadowEnabled="true"
-        app:shadowHeight="5dp"
-        app:cornerRadius="5dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_above="@+id/linearLayout2"
-        android:layout_centerHorizontal="true" />
 
 
     <LinearLayout

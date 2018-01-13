@@ -9,8 +9,9 @@
     <string name="PhoneNumber">מספר טלפון</string>
     <string name="FullName">שם מלא</string>
     <string name="readme">ReadMe</string>
-    <string name="googlemaps">Map</string>
+    <string name="googlemaps">מפה</string>
     <string name="picture">Picture</string>
+    <string name="picReg">העלת תמונה</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,4 +21,8 @@
     <string name="takepic">TakePicture</string>
     <string name="uploadpic">Upload</string>
     <string name="choosepic">choose</string>
+    <string name="PicReg">העלאת תמונה</string>
+    <string name="BtnIn">התחבר כאורח</string>
+    <string name="enterScureCode">קוד אבטחה</string>
+    <string name="forgot_pwd">שכחתי סיסמה</string>
 </resources>

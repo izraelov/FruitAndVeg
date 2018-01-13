@@ -49,6 +49,33 @@
             app:met_singleLineEllipsis="true"
             />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/ckbRemember"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/ThemeOverlay.AppCompat.Light"
+                android:text="זכור אותי"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                app:cbd_strokeColor="@android:color/white"
+                app:cbd_tickColor="@color/colorPrimaryDark"
+                />
+
+            <TextView
+                android:id="@+id/txtForgotPwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/forgot_pwd"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -58,16 +85,30 @@
         android:textColor="@android:color/white"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         app:buttonColor="@color/btnSignActive"
         android:layout_height="wrap_content"
         app:shadowColor="@android:color/black"
         app:shadowEnabled="true"
         app:shadowHeight="5dp"
         app:cornerRadius="4dp"
-        android:layout_marginTop="171dp"
-        android:layout_below="@+id/linearLayout3"
-        android:layout_alignStart="@+id/linearLayout3" />
+        android:layout_alignParentBottom="true" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/BtnIn"
+        android:text="@string/BtnIn"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_width="170dp"
+        app:buttonColor="@color/btnSignUp"
+        android:layout_height="wrap_content"
+        app:shadowColor="@android:color/black"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/linearLayout3" />
 
 
 

@@ -9,10 +9,12 @@
     android:background="@drawable/background"
     tools:openDrawer="start">
 
+
     <include
         layout="@layout/app_bar_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -25,5 +27,6 @@
         app:itemTextColor="@android:color/white"
         app:itemIconTint="@android:color/white"
         app:menu="@menu/activity_home_drawer" />
+
 
 </android.support.v4.widget.DrawerLayout>

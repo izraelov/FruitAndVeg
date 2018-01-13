@@ -1,6 +1,7 @@
 package com.idoon.fruitandveg;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,8 +18,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class SignUp extends AppCompatActivity {
 
-    MaterialEditText edtPhone,edtName,edtPassword;
-    Button btnSignUp;
+    MaterialEditText edtPhone,edtName,edtPassword,edtSecureCode;
+    Button btnSignUp,picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +29,21 @@ public class SignUp extends AppCompatActivity {
         edtName = (MaterialEditText) findViewById(R.id.edtName);
         edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
         edtPhone = (MaterialEditText) findViewById(R.id.edtPhone);
+        edtSecureCode = (MaterialEditText) findViewById(R.id.edtSecureCode);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        picture = (Button)findViewById(R.id.picture);
 
         //Init FireBase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
+
+        picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent picture = new Intent(SignUp.this, com.idoon.fruitandveg.picture.class);
+                startActivity(picture);
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,15 +59,17 @@ public class SignUp extends AppCompatActivity {
                         if(dataSnapshot.child(edtPhone.getText().toString()).exists())
                         {
                             mDialog.dismiss();
-                            Toast.makeText(SignUp.this, "מספר הטלפון כבר נמצא בשימוש", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "מספר הטלפון כבר רשום במערכת", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             mDialog.dismiss();
-                            User user = new User(edtName.getText().toString(),edtPassword.getText().toString());
+                            User user = new User(edtName.getText().toString(),edtPassword.getText().toString(),edtSecureCode.getText().toString());
                             table_user.child(edtPhone.getText().toString()).setValue(user);
+                            table_user.child(user.getIsStaff());
                             Toast.makeText(SignUp.this, "נרשם בהצלחה", Toast.LENGTH_SHORT).show();
                             finish();
+
                         }
                     }
 
