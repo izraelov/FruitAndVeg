@@ -62,8 +62,6 @@ public class picture extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadImage();
-
-
             }
         });
 
@@ -74,8 +72,6 @@ public class picture extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-
-
     }
 
     private void uploadImage() {
@@ -110,8 +106,6 @@ public class picture extends AppCompatActivity {
                         }
                     });
         }
-
-
     }
 
     private void chooseImage() {
@@ -137,7 +131,5 @@ public class picture extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        //imageview.setImageBitmap(bitmap);
     }
 }

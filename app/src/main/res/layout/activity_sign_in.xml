@@ -60,7 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                style="@style/ThemeOverlay.AppCompat.Light"
+                style="@style/Material.Drawable.CheckBox"
                 android:text="זכור אותי"
                 android:gravity="center_vertical"
                 android:textColor="@android:color/white"

@@ -41,7 +41,7 @@ public class Food {
     }
 
     public String getMenuId() {
-        return MenuId;
+        return this.MenuId;
     }
 
     public void setName(String name) {

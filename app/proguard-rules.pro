@@ -1,13 +1,33 @@
-# Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to flags specified
-# in C:\Users\itayi\AppData\Local\Android\Sdk/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
+####################################################################################################
+####################################################################################################
+####################################################################################################
+######################################### PROGUARD #################################################
+####################################################################################################
+####################################################################################################
+####################################################################################################
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+
+# to keep the Show Forgot Password Dialog from SignIn class
+-keep public class SignIn{
+    private void showForgotPwdDialog();
+}
+# to keep the 'currentUser' Var
+# Because currentUser is usefull for SignIn and SignUp Classes
+-keep class Common {
+ public static final android.Common.*;
+}
+
+# Keep Classes MainActivity & foodList
+-keep public class * extends android.app.Home
+-keep public class * extends android.app.FoodList
+
+
+ # keep inteface , keep class ,
+
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface

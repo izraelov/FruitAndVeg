@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +23,14 @@ import com.idoon.fruitandveg.Common.Common;
 import com.idoon.fruitandveg.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import io.paperdb.Paper;
+
 public class SignIn extends AppCompatActivity {
 
     EditText edtPhone,edtPassword;
     Button btnSignIn,BtnIn;
     TextView txtForgotPwd;
+    CheckBox ckbRemember;
 
     FirebaseDatabase database;
     DatabaseReference table_user;
@@ -41,6 +45,10 @@ public class SignIn extends AppCompatActivity {
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         BtnIn = (Button) findViewById(R.id.BtnIn);
         txtForgotPwd = (TextView)findViewById(R.id.txtForgotPwd);
+        ckbRemember = (CheckBox)findViewById(R.id.ckbRemember);
+
+        //Init Paper
+        Paper.init(this);
 
         //Init FireBase
         database = FirebaseDatabase.getInstance();
@@ -64,11 +72,10 @@ public class SignIn extends AppCompatActivity {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        User Guest = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-
-                        Toast.makeText(SignIn.this,"התחברת בהצלחה כאורח!",Toast.LENGTH_SHORT).show();
+                        User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                        Toast.makeText(SignIn.this,"התחברת בהצלחה כאורח",Toast.LENGTH_SHORT).show();
                         Intent homeIntent = new Intent(SignIn.this, Home.class);
-                        Common.currentUser = Guest;
+                        Common.currentUser = user;
                         startActivity(homeIntent);
                         finish();
 
@@ -87,6 +94,14 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //SAVE user & password :
+                if(ckbRemember.isChecked())
+                {
+                    Paper.book().write(Common.USER_KEY,edtPhone.getText().toString());
+                    Paper.book().write(Common.PWD_KEY,edtPhone.getText().toString());
+                }
+
                 final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
                 mDialog.setMessage("אנא המתן...");
                 mDialog.show();
@@ -115,23 +130,22 @@ public class SignIn extends AppCompatActivity {
                                         finish();
 
                                         table_user.removeEventListener(this);
-                                    }
-                                } else {
-                                    mDialog.dismiss();
-                                    Toast.makeText(SignIn.this, "סיסמה שגויה!", Toast.LENGTH_SHORT).show();
+                                    }}
+                                else
+                                {
+                                    Toast.makeText(SignIn.this, "לא רשום במערכת / סיסמה שגויה!", Toast.LENGTH_SHORT).show();
                                 }
                         }
-                    else
-                    {
-                        mDialog.dismiss();
-                        Toast.makeText(SignIn.this, "המשתמש לא קיים במערכת", Toast.LENGTH_SHORT).show();
+                        else
+                        {
+                            Toast.makeText(SignIn.this, "המשתמש לא קיים במערכת", Toast.LENGTH_SHORT).show();
+                            mDialog.dismiss();
+                        }
                     }
-                }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         mDialog.dismiss();
-
                     }
                 });
             }

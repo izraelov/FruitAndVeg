@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.idoon.fruitandveg.Model.Guest;
 import com.idoon.fruitandveg.Model.User;
 
 /**
@@ -13,6 +14,11 @@ import com.idoon.fruitandveg.Model.User;
 public class Common {
 
     public static User currentUser;
+    public static Guest cuurentGuest;
+
+    public static final String DELETE = "Delete";
+    public static final String USER_KEY = "User";
+    public static final String PWD_KEY = "Password";
 
     public static boolean isConnectedToInterner(Context context)
     {

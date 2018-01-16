@@ -28,6 +28,7 @@ dependencies {
     })
 
     //Add Bibrary
+
     compile 'io.paperdb:paperdb:2.6'
     compile 'com.github.d-max:spots-dialog:0.7@aar'
     compile 'com.github.rey5137:material:1.2.4'
@@ -49,5 +50,6 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.6.2'
     compile 'com.google.firebase:firebase-storage:11.6.2'
     testCompile 'junit:junit:4.12'
+
 }
 apply plugin: 'com.google.gms.google-services'

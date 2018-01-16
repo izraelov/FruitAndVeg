@@ -2,9 +2,10 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardElevation="10dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,50 +13,54 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPassword"
+        <TextView
+            android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="סיסמה"
-            android:inputType="textPassword"
-            android:text=""
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:text="Name"
             android:textSize="24sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:met_baseColor="@color/colorPrimary"
             app:met_floatingLabel="highlight"
             app:met_minCharacters="5"
             app:met_primaryColor="@color/colorPrimary"
-            app:met_singleLineEllipsis="true" />
+            app:met_singleLineEllipsis="true"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtNewPassword"
+        <TextView
+            android:id="@+id/txtPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="סיסמה חדשה"
-            android:inputType="textPassword"
-            android:text=""
-            android:textColor="@color/colorPrimary"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:text="Phone"
             android:textSize="24sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:met_baseColor="@color/colorPrimary"
             app:met_floatingLabel="highlight"
+            app:met_minCharacters="5"
             app:met_primaryColor="@color/colorPrimary"
-            app:met_singleLineEllipsis="true" />
+            app:met_singleLineEllipsis="true"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtRepeatPassword"
+        <TextView
+            android:id="@+id/txtgetCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="חזור על הסיסמה חדשה"
-            android:inputType="textPassword"
-            android:text=""
-            android:textColor="@color/colorPrimary"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:text="Code"
             android:textSize="24sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:met_baseColor="@color/colorPrimary"
             app:met_floatingLabel="highlight"
+            app:met_minCharacters="5"
             app:met_primaryColor="@color/colorPrimary"
-            app:met_singleLineEllipsis="true" />
+            app:met_singleLineEllipsis="true"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgprofile"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
 
 </android.support.v7.widget.CardView>

@@ -40,8 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
-
-import static com.idoon.fruitandveg.R.id.edtPassword;
+import io.paperdb.Paper;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,7 +50,6 @@ public class Home extends AppCompatActivity
 
     TextView txtFullName;
     ImageView imgprofile;
-    MaterialEditText editPassword,edtNewPassword,edtRepeatPassword;
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
 
@@ -72,6 +70,8 @@ public class Home extends AppCompatActivity
         //Init FireBase
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
+
+        Paper.init(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,11 +98,6 @@ public class Home extends AppCompatActivity
         imgprofile = (ImageView)findViewById(R.id.imgprofile);
 
         txtFullName.setText(Common.currentUser.getName());
-
-
-
-
-
 
         //Load Menu
         recycler_menu = (RecyclerView)findViewById(R.id.recycler_menu);
@@ -179,11 +174,8 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_change_pass) {
-            showChangePassworddDialog();
-            Toast.makeText(Home.this,"test",Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_profile) {
-            Toast.makeText(Home.this,"Name: "+(Common.currentUser.getName()),Toast.LENGTH_LONG);
+        if (id == R.id.nav_profile) {
+            getinfo();
 
         } else if (id == R.id.nav_cart) {
 
@@ -191,6 +183,23 @@ public class Home extends AppCompatActivity
 
         } else if (id == R.id.nav_log_out) {
 
+            //Delete Remeber user & pass
+            Paper.book().destroy();
+
+            //LogOut
+            Intent SignIn = new Intent(Home.this, com.idoon.fruitandveg.SignIn.class);
+            SignIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(SignIn);
+
+        }
+        else if (id == R.id.nav_change_pwd){
+            DatabaseReference table_user = database.getReference("User");
+            if(table_user == null && table_user.equals("")) {
+                Toast.makeText(Home.this,"אתה אורח - לא רשאי לשנות סיסמה",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                showChangePasswordDialog();
+            }
         }
 
 
@@ -199,8 +208,43 @@ public class Home extends AppCompatActivity
         return true;
     }
 
-    private void showChangePassworddDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+    private void getinfo() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+        alertDialog.setTitle("פרטים אישיים");
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout_pwd = inflater.inflate(R.layout.info_user_layout,null);
+
+        final TextView txtName = (TextView) layout_pwd.findViewById(R.id.txtName);
+        final TextView txtPhone = (TextView) layout_pwd.findViewById(R.id.txtPhone);
+        final TextView txtgetCode = (TextView) layout_pwd.findViewById(R.id.txtgetCode);
+        final ImageView imgprofile =(ImageView)layout_pwd.findViewById(R.id.imgprofile);
+
+        alertDialog.setView(layout_pwd);
+
+        alertDialog.setNegativeButton("אישור", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                final android.app.AlertDialog waitingDialog = new SpotsDialog(Home.this);
+                //waitingDialog.show();
+                dialogInterface.dismiss();
+
+
+
+                //Name of user:
+                txtName.setText(Common.currentUser.getName());
+                txtPhone.setText(Common.currentUser.getPhone());
+                txtgetCode.setText(Common.currentUser.getSecureCode());
+                //imgprofile.ge(Common.currentUser.getImage());
+            }
+        });
+        alertDialog.show();
+    }
+
+
+    private void showChangePasswordDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
         alertDialog.setTitle("שנה סיסמה");
         alertDialog.setMessage("אנא מלא את הפרטים הבאים");
 
@@ -208,9 +252,9 @@ public class Home extends AppCompatActivity
         View layout_pwd = inflater.inflate(R.layout.change_password_layout,null);
 
 
-        editPassword = (MaterialEditText)layout_pwd.findViewById(edtPassword);
-        edtNewPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtNewPassword);
-        edtRepeatPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtRepeatPassword);
+        final MaterialEditText editPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtPhone);
+        final MaterialEditText edtNewPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtNewPassword);
+        final MaterialEditText edtRepeatPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtRepeatPassword);
         alertDialog.setView(layout_pwd);
 
         //Button
@@ -265,8 +309,10 @@ public class Home extends AppCompatActivity
         alertDialog.setNegativeButton("בטל", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
 
             }
         });
+        alertDialog.show();
     }
 }
